@@ -7,6 +7,7 @@ import {
   Dialog,
   Flex,
   Grid,
+  Label,
   Spinner,
   Stack,
   Text,
@@ -17,7 +18,7 @@ import {
 } from '@sanity/ui'
 import { buildTheme } from '@sanity/ui/theme'
 import { BoltIcon, CogIcon } from '@sanity/icons'
-import { FormField, useColorSchemeValue } from 'sanity'
+import { useColorSchemeValue } from 'sanity'
 
 import { useClient } from './hook/useClient'
 import { useClientSubscription } from './hook/useClientSubscription'
@@ -68,7 +69,7 @@ const VercelDeploy = ({ tool }: VercelDeployProps) => {
 
   // form field states
   const [pendingProject, setPendingProject] = useState<PendingProject>(
-    INITIAL_PENDING_PROJECT
+    INITIAL_PENDING_PROJECT,
   )
 
   // predefined project states
@@ -93,7 +94,7 @@ const VercelDeploy = ({ tool }: VercelDeployProps) => {
         try {
           const team = await getTeamById(
             pendingProject.teamId,
-            pendingProject.accessToken
+            pendingProject.accessToken,
           )
 
           if (!team?.data?.id) {
@@ -122,7 +123,7 @@ const VercelDeploy = ({ tool }: VercelDeployProps) => {
         const project = await getProjectById(
           pendingProject.projectId,
           pendingProject.accessToken,
-          pendingProject.teamId
+          pendingProject.teamId,
         )
 
         if (!project?.data?.id) {
@@ -170,7 +171,7 @@ const VercelDeploy = ({ tool }: VercelDeployProps) => {
         setPendingProject(INITIAL_PENDING_PROJECT) // Reset the pending webhook state
       })
     },
-    [client]
+    [client],
   )
 
   // Setup predefined Projects
@@ -184,7 +185,7 @@ const VercelDeploy = ({ tool }: VercelDeployProps) => {
         ? new Set(deployments.map((p) => p.url))
         : new Set()
       const missingProjects = predefinedProjects.filter(
-        (project) => !existingUrls.has(project.url)
+        (project) => !existingUrls.has(project.url),
       )
 
       if (missingProjects.length) {
@@ -198,7 +199,7 @@ const VercelDeploy = ({ tool }: VercelDeployProps) => {
         })
       }
     },
-    [deployments, onSubmit]
+    [deployments, onSubmit],
   )
 
   const onAddToken = useCallback(
@@ -220,7 +221,7 @@ const VercelDeploy = ({ tool }: VercelDeployProps) => {
         }
       })
     },
-    [client, initializePredefinedProjects]
+    [client, initializePredefinedProjects],
   )
 
   // attempt to initialize predefined projects when accessToken is found
@@ -321,7 +322,7 @@ const VercelDeploy = ({ tool }: VercelDeployProps) => {
                 ) : deployments?.length ? (
                   deployments.map((deployment) => {
                     const isLocked = predefinedProjects?.some(
-                      (project) => project.url === deployment.url
+                      (project) => project.url === deployment.url,
                     )
 
                     return (
@@ -532,13 +533,12 @@ const VercelDeploy = ({ tool }: VercelDeployProps) => {
                     </Flex>
                   </Card>
 
-                  <FormField
-                    title={
-                      accessToken
+                  <Stack space={3}>
+                    <Label size={1}>
+                      {accessToken
                         ? 'New Vercel Access Token'
-                        : 'Vercel Access Token'
-                    }
-                  >
+                        : 'Vercel Access Token'}
+                    </Label>
                     <TextInput
                       ref={accessTokenFieldRef}
                       type="text"
@@ -548,7 +548,7 @@ const VercelDeploy = ({ tool }: VercelDeployProps) => {
                         setPendingAccessToken(accessToken)
                       }}
                     />
-                  </FormField>
+                  </Stack>
                 </Stack>
               </form>
             </Box>

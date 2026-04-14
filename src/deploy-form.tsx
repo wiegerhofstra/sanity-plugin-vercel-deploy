@@ -5,14 +5,38 @@ import {
   Dialog,
   Flex,
   Grid,
+  Label,
   Stack,
   Switch,
   Text,
   TextInput,
 } from '@sanity/ui'
-import { FormField } from 'sanity'
 
 import type { PendingProject } from './types'
+
+type FieldProps = {
+  title?: React.ReactNode
+  description?: React.ReactNode
+  children: React.ReactNode
+}
+
+const Field = ({ title, description, children }: FieldProps) => {
+  return (
+    <Stack space={3}>
+      {(title || description) && (
+        <Stack space={2}>
+          {title ? <Label size={1}>{title}</Label> : null}
+          {description ? (
+            <Text size={1} muted>
+              {description}
+            </Text>
+          ) : null}
+        </Stack>
+      )}
+      {children}
+    </Stack>
+  )
+}
 
 type Props = {
   header: string
@@ -72,7 +96,7 @@ const DeployDialogForm = ({
     >
       <Box padding={4}>
         <Stack space={4}>
-          <FormField
+          <Field
             title="Display Name (internal use only)"
             description={
               <>
@@ -89,9 +113,9 @@ const DeployDialogForm = ({
                 setValues((prev) => ({ ...prev, name }))
               }}
             />
-          </FormField>
+          </Field>
 
-          <FormField
+          <Field
             title="Project ID"
             description={`Vercel Project: Settings → General → "Project ID"`}
           >
@@ -103,9 +127,9 @@ const DeployDialogForm = ({
                 setValues((prev) => ({ ...prev, projectId }))
               }}
             />
-          </FormField>
+          </Field>
 
-          <FormField
+          <Field
             title="Team ID"
             description={`Required for projects under a Vercel Team: Settings → General → "Team ID"`}
           >
@@ -117,9 +141,9 @@ const DeployDialogForm = ({
                 setValues((prev) => ({ ...prev, teamId }))
               }}
             />
-          </FormField>
+          </Field>
 
-          <FormField
+          <Field
             title="Deploy Hook URL"
             description={`Vercel Project: Settings → Git → "Deploy Hooks"`}
           >
@@ -132,16 +156,16 @@ const DeployDialogForm = ({
                 setValues((prev) => ({ ...prev, url }))
               }}
             />
-          </FormField>
+          </Field>
 
           {hideAccessToken ? (
-            <FormField title="Access Token">
+            <Field title="Access Token">
               <Card padding={4} radius={3} tone="caution">
                 <Text>Access Token is hidden for security purposes.</Text>
               </Card>
-            </FormField>
+            </Field>
           ) : (
-            <FormField
+            <Field
               title="Access Token"
               description={`Vercel Personal Account: Account Settings → "Tokens"`}
             >
@@ -153,11 +177,11 @@ const DeployDialogForm = ({
                   setValues((prev) => ({ ...prev, accessToken }))
                 }}
               />
-            </FormField>
+            </Field>
           )}
 
           {!hideDisableDeleteAction && (
-            <FormField>
+            <Field>
               <Card tone="critical" padding={3} radius={2} border>
                 <Flex align="center">
                   <Switch
@@ -194,7 +218,7 @@ const DeployDialogForm = ({
                   </Stack>
                 </Flex>
               </Card>
-            </FormField>
+            </Field>
           )}
         </Stack>
       </Box>
