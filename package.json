@@ -1,6 +1,6 @@
 {
-  "name": "sanity-plugin-vercel-deploy",
-  "version": "4.0.1-local.0",
+  "name": "@wiegerhofstra/sanity-plugin-vercel-deploy",
+  "version": "1.0.0",
   "type": "module",
   "description": "Trigger Vercel Deploy Hooks from your Sanity Studio",
   "keywords": [
@@ -10,16 +10,16 @@
     "deploy",
     "webhook"
   ],
-  "homepage": "https://github.com/ndimatteo/sanity-plugin-vercel-deploy#readme",
+  "homepage": "https://github.com/wiegerhofstra/sanity-plugin-vercel-deploy#readme",
   "bugs": {
-    "url": "https://github.com/ndimatteo/sanity-plugin-vercel-deploy/issues"
+    "url": "https://github.com/wiegerhofstra/sanity-plugin-vercel-deploy/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/ndimatteo/sanity-plugin-vercel-deploy.git"
+    "url": "git+ssh://git@github.com/wiegerhofstra/sanity-plugin-vercel-deploy.git"
   },
   "license": "MIT",
-  "author": "Nick DiMatteo <hello@nickdimatteo.com>",
+  "author": "Wieger Hofstra",
   "exports": {
     ".": {
       "source": "./src/index.ts",
