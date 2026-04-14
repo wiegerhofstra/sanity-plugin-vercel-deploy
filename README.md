@@ -19,9 +19,7 @@ This is a fork of the plugin made by Nick DiMatteo https://github.com/ndimatteo/
 ## 🔌 Install
 
 ```sh
-yarn add sanity-plugin-vercel-deploy
-# or npm
-npm i sanity-plugin-vercel-deploy
+npm i @wiegerhofstra/sanity-plugin-vercel-deploy
 ```
 
 > **Warning** <br />This is a **Sanity Studio V3** plugin. For the V2 version, please refer to the [studio-v2 branch](https://github.com/ndimatteo/sanity-plugin-vercel-deploy/tree/studio-v2).
@@ -117,6 +115,3 @@ on how to run this plugin with hotreload in the studio.
 
 ### MIT
 
-> [nickdimatteo.com](https://nickdimatteo.com) &nbsp;&middot;&nbsp;
-> Github [@ndimatteo](https://github.com/ndimatteo) &nbsp;&middot;&nbsp;
-> Instagram [@ndimatteo](https://instagram.com/ndimatteo)
